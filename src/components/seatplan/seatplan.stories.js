@@ -2,11 +2,11 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import { Seatplan } from "./seatplan.component";
+import { Seats } from "./seats.seatplan";
 
 storiesOf("seatplan/seatplan", module).add("with text", () => (
-  <Seatplan>
+  <Seats>
     <div>div1</div>
     <div>div2</div>
-  </Seatplan>
+  </Seats>
 ));

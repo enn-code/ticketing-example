@@ -1,58 +1,31 @@
 import React, { createContext, Component } from "react";
-import logo from "./logo.svg";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+// TODO: Remove App.css dependency (and move App.js)
 import "./App.css";
 
-const ThemeContext = createContext("blue");
-
-class ThemeStore extends React.Component {
-  state = {
-    theme: "blue"
-  };
-
-  toggleTheme = () => {
-    this.setState(state => ({
-      theme: state.theme === "blue" ? "green" : "blue"
-    }));
-  };
-
-  render() {
-    const { theme } = this.state;
-    return (
-      <ThemeContext.Provider
-        value={{
-          theme,
-          onToggleTheme: this.toggleTheme
-        }}
-      >
-        {this.props.children}
-      </ThemeContext.Provider>
-    );
-  }
-}
-
-const RenderTheme = () => {
-  return (
-    <ThemeContext.Consumer>
-      {({ theme, onToggleTheme }) => (
-        <div>
-          <h1>{theme}</h1>
-          <button onClick={() => onToggleTheme()}>Toggle Theme</button>
-        </div>
-      )}
-    </ThemeContext.Consumer>
-  );
-};
+import { ThemeProvider } from "./providers/theme.context";
+import SeatplanView from "./views/seatplan.views";
+import CheckoutView from "./views/checkout.views";
+import ErrorView from "./views/error.views";
+import Layout from "./views/layout.views";
 
 class App extends Component {
   render() {
     return (
-      <ThemeStore>
+      <ThemeProvider>
         <div className="App">
-          <header className="App-header">
-            <RenderTheme />
-          </header>
+          <Router>
+            <Layout>
+              <Switch>
+                <Route path="/" exact component={SeatplanView} />
+                <Route path="/checkout" component={CheckoutView} />
+                <Route component={ErrorView} />
+              </Switch>
+            </Layout>
+          </Router>
         </div>
-      </ThemeStore>
+      </ThemeProvider>
     );
   }
 }
