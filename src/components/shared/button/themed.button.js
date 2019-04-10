@@ -10,11 +10,14 @@ const ThemedButton = styled.button`
 `;
 
 export const ActionButton = props => {
-  const { handleClick } = props;
+  const { handleClick, nextUrl, history } = props;
   return (
     <ThemeConsumer>
       {({ theme }) => (
-        <ThemedButton theme={theme} onClick={() => handleClick()}>
+        <ThemedButton
+          theme={theme}
+          onClick={() => handleClick(nextUrl, history)}
+        >
           {props.children}
         </ThemedButton>
       )}

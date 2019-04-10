@@ -1,5 +1,6 @@
 import React, { createContext, Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 // TODO: Remove App.css dependency (and move App.js)
 import "./App.css";
@@ -15,7 +16,7 @@ class App extends Component {
     return (
       <ThemeProvider>
         <div className="App">
-          <Router>
+          <Router history={createBrowserHistory()}>
             <Layout>
               <Switch>
                 <Route path="/" exact component={SeatplanView} />
