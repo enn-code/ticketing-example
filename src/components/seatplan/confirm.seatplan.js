@@ -8,7 +8,6 @@ const handleClick = (nextUrl, history) => {
 };
 
 const ConfirmSeats = props => {
-  console.log(props);
   const { history } = props;
   return (
     <ActionButton
